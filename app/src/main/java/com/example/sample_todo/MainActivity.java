@@ -10,14 +10,17 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private Button add;
     private ListView listView;
     private TextView count;
     Context context;
-
     private DbHandler dbHandler;
+    private List<ToDo> toDos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,13 @@ public class MainActivity extends AppCompatActivity {
         add = findViewById(R.id.add);
         listView = findViewById(R.id.todolist);
         count = findViewById(R.id.todocount);
+        toDos = new ArrayList<>();
+
+        toDos = dbHandler.getAllToDos();
+
+        ToDoAdapter adapter = new ToDoAdapter(context,R.layout.single_todo,toDos);
+
+        listView.setAdapter(adapter);
 
         //get todo counts from the table
         int countToDo = dbHandler.countToDo();
