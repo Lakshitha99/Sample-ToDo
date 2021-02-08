@@ -26,19 +26,7 @@ public class ToDoAdapter extends ArrayAdapter<ToDo> {
         this.todos = todos;
     }
 
-    /* remove start*/
 
-    TextView title = row.findViewById(R.id.title);
-        TextView description = row.findViewById(R.id.description);
-        ImageView imageView = row.findViewById(R.id.onGoing);
-
-        //todos [obj1,obj2,obj3]
-        ToDo toDo = todos.get(position);
-        title.setText(toDo.getTitle());
-        description.setText(toDo.getDescription());
-        imageView.setVisibility(row.INVISIBLE);
-
-    /*remove end*/
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
