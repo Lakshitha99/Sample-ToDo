@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private DbHandler dbHandler;
     private List<ToDo> toDos;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,15 +59,21 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                ToDo toDo = toDos.get(position);
+                final ToDo todo = toDos.get(position);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle(toDo.getTitle());
-                builder.setMessage(toDo.getDescription());
+                builder.setTitle(todo.getTitle());
+                builder.setMessage(todo.getDescription());
 
                 builder.setPositiveButton("Finished", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         startActivity(new Intent(context,MainActivity.class));
+                    }
+                });
+                builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dbHandler.deleteToDo(todo.getId());
                     }
                 });
                 builder.setNeutralButton("Update", new DialogInterface.OnClickListener() {
@@ -75,12 +82,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(context,EditToDo.class));
                     }
                 });
-                builder.setNegativeButton("Delete", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
 
-                    }
-                });
                 builder.show();
             }
         });

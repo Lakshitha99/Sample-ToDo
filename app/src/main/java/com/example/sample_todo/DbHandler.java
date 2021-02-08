@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DbHandler extends SQLiteOpenHelper {
 
-    private static final int VERSION = 1 ;
+    private static final int VERSION = 1;
     private static final String DB_NAME = "todo";
     private static final String TABLE_NAME = "todo";
 
@@ -32,13 +32,13 @@ public class DbHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String TABLE_CREATE_QUERY = "CREATE TABLE "+TABLE_NAME+" " +
+        String TABLE_CREATE_QUERY = "CREATE TABLE " + TABLE_NAME + " " +
                 "("
-                +ID+" INTEGER PRIMARY KEY " + "AUTOINCREMENT,"
-                +TITLE + " TEXT,"
-                +DESCRIPTION + " TEXT,"
-                +STARTED + " TEXT,"
-                +FINISHED + " TEXT" +
+                + ID + " INTEGER PRIMARY KEY " + "AUTOINCREMENT,"
+                + TITLE + " TEXT,"
+                + DESCRIPTION + " TEXT,"
+                + STARTED + " TEXT,"
+                + FINISHED + " TEXT" +
                 ");";
         /*CREATE TABLE todo (id,title,desc,star,finished);*/
 
@@ -47,7 +47,7 @@ public class DbHandler extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
-        String DROP_TABLE_QUERY = "DROP TABLE IF EXISTS "+ TABLE_NAME;
+        String DROP_TABLE_QUERY = "DROP TABLE IF EXISTS " + TABLE_NAME;
         // Drop older table if existed
         db.execSQL(DROP_TABLE_QUERY);
         // create tables again
@@ -55,41 +55,41 @@ public class DbHandler extends SQLiteOpenHelper {
     }
 
     //data insert
-    public void addToDo (ToDo toDo) {
+    public void addToDo(ToDo toDo) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(TITLE,toDo.getTitle());
+        contentValues.put(TITLE, toDo.getTitle());
         contentValues.put(DESCRIPTION, toDo.getDescription());
-        contentValues.put(STARTED,toDo.getStarted());
-        contentValues.put(FINISHED,toDo.getFinished());
+        contentValues.put(STARTED, toDo.getStarted());
+        contentValues.put(FINISHED, toDo.getFinished());
 
         //save to table
-        sqLiteDatabase.insert(TABLE_NAME,null,contentValues);
+        sqLiteDatabase.insert(TABLE_NAME, null, contentValues);
         //close database
         sqLiteDatabase.close();
     }
 
     // Count todo table records
-    public int countToDo(){
+    public int countToDo() {
         SQLiteDatabase db = getReadableDatabase();
-        String query = "SELECT*FROM "+ TABLE_NAME;
+        String query = "SELECT*FROM " + TABLE_NAME;
 
-        Cursor cursor = db.rawQuery(query,null);
+        Cursor cursor = db.rawQuery(query, null);
         return cursor.getCount();
     }
 
     //get all todos into a list
-    public List<ToDo> getAllToDos(){
+    public List<ToDo> getAllToDos() {
 
         List<ToDo> toDos = new ArrayList();
         SQLiteDatabase db = getReadableDatabase();
-        String query = "SELECT*FROM "+TABLE_NAME;
+        String query = "SELECT*FROM " + TABLE_NAME;
 
-        Cursor cursor = db.rawQuery(query,null);
+        Cursor cursor = db.rawQuery(query, null);
 
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
                 //create new todo object
                 ToDo toDo = new ToDo();
@@ -105,6 +105,12 @@ public class DbHandler extends SQLiteOpenHelper {
 
             } while (cursor.moveToNext());
         }
-        return toDos;
+        return toDos; }
+
+        // delete item
+        public void deleteToDo(int id){
+            SQLiteDatabase db = getWritableDatabase();
+            db.delete(TABLE_NAME, "id =?",new String[]{String.valueOf(id)});
+            db.close();
+        }
     }
-}
