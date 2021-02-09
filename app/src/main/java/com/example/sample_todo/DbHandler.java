@@ -105,12 +105,36 @@ public class DbHandler extends SQLiteOpenHelper {
 
             } while (cursor.moveToNext());
         }
-        return toDos; }
-
-        // delete item
-        public void deleteToDo(int id){
-            SQLiteDatabase db = getWritableDatabase();
-            db.delete(TABLE_NAME, "id =?",new String[]{String.valueOf(id)});
-            db.close();
-        }
+        return toDos;
     }
+
+    // delete item
+    public void deleteToDo(int id) {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(TABLE_NAME, "id =?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
+    // get a single todo
+    public ToDo getSingleToDo(int id) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        Cursor cursor = db.query(TABLE_NAME,new String[]{ID,TITLE,DESCRIPTION,STARTED, FINISHED},ID + "= ?",new String[]{String.valueOf(id)},null,null,null);
+        ToDo toDo;
+        if(cursor != null){
+             cursor.moveToFirst();
+           toDo = new ToDo(
+                   cursor.getInt(0),
+                   cursor.getString(1),
+                   cursor.getString(2),
+                   cursor.getLong(3),
+                   cursor.getLong(4)
+
+           );
+           return toDo;
+        }
+        return null;
+    }
+}
+
+

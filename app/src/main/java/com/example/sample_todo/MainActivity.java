@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle(todo.getTitle());
                 builder.setMessage(todo.getDescription());
-
                 builder.setPositiveButton("Finished", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -79,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
                 builder.setNeutralButton("Update", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(context,EditToDo.class));
+                        Intent intent = new Intent(context,EditToDo.class);
+                        intent.putExtra("id",String.valueOf(todo.getId()));
+                        startActivity(intent);
                     }
                 });
 
