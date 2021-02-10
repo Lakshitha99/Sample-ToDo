@@ -66,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
                 builder.setPositiveButton("Finished", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        todo.setFinished(System.currentTimeMillis());
+                        dbHandler.updateSingleToDo(todo);
                         startActivity(new Intent(context,MainActivity.class));
                     }
                 });
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dbHandler.deleteToDo(todo.getId());
+                        startActivity(new Intent(context,MainActivity.class));
                     }
                 });
                 builder.setNeutralButton("Update", new DialogInterface.OnClickListener() {
