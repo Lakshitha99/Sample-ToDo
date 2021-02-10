@@ -54,7 +54,7 @@ public class DbHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    //data insert
+    //data insert/ add a single todo
     public void addToDo(ToDo toDo) {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
@@ -134,6 +134,22 @@ public class DbHandler extends SQLiteOpenHelper {
            return toDo;
         }
         return null;
+    }
+
+    // update a single todo
+    public int updateSingleToDo(ToDo toDo){
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(TITLE, toDo.getTitle());
+        contentValues.put(DESCRIPTION, toDo.getDescription());
+        contentValues.put(STARTED, toDo.getStarted());
+        contentValues.put(FINISHED, toDo.getFinished());
+
+        int status = db.update(TABLE_NAME,contentValues,ID +" =?",new String[]{String.valueOf(toDo.getId())});
+        db.close();
+        return status;
     }
 }
 
