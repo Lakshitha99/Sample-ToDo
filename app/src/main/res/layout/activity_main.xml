@@ -4,11 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
+    android:textColor="@color/login_form_details"
     tools:context=".MainActivity">
 
 
     <ListView
         android:id="@+id/todolist"
+        android:textColor="@color/login_form_details"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         android:layout_marginStart="0dp"
@@ -28,12 +31,15 @@
         android:layout_marginStart="24dp"
         android:layout_marginBottom="24dp"
         android:text="You have x ToDos in Today"
+        android:textColor="@color/login_form_details"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/add"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <Button
+        android:background="@drawable/btn_bg"
+        android:textColor="@color/login_form_details"
         android:id="@+id/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
