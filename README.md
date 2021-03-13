@@ -20,3 +20,9 @@ smartphone(iphone, adroid) support
 easy to use web interface
 desktop or offline version nice to have
 
+
+# Splash Screen
+![ToDo Splash-screen](./Readme_images/1.jpeg)
+
+# Add New ToDo
+![ToDo Add New ToDo](./Readme_images/2.jpeg)
