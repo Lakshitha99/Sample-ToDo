@@ -22,7 +22,11 @@ desktop or offline version nice to have
 
 
 # Splash Screen
-![ToDo Splash-screen](./Readme_images/1.jpeg)
+<p align="center">
+<img src="./Readme_images/1.jpeg" width="360" height="640">
+</p>
 
 # Add New ToDo
-![ToDo Add New ToDo](./Readme_images/2.jpeg)
+<p align="center">
+<img src="./Readme_images/2.jpeg" width="360" height="640">
+</p>
